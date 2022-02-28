@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace loginRegister
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionbar", MainLauncher = false)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionbar", NoHistory = true, MainLauncher = false)]
     public class MainActivity : AppCompatActivity
     {
         TextInputLayout namecontainer, emailcontainer, usernamecontainer, passwordconatiner;
@@ -31,7 +31,7 @@ namespace loginRegister
             SetContentView(Resource.Layout.activity_main);
             Uireferences();
             registerbutton.Click += Registerbutton_Click;
-            
+
             TextPaint paint = regitertext.Paint;
             float width = paint.MeasureText(regitertext.Text);
 
@@ -50,11 +50,17 @@ namespace loginRegister
             google.Click += Google_Click;
         }
 
-       
+
 
         private void Registerbutton_Click(object sender, System.EventArgs e)
         {
-            if (passwordok() && emailok() && nameok() && usernameok())
+            if (!usernameok() &&  !emailok()   && !nameok() && !passwordok())
+            {
+                Toast.MakeText(this, "Task Failed Successfully", ToastLength.Long).Show();
+                return;
+            }
+
+            if (usernameok() &&  emailok()   && nameok() && passwordok())
             {
                 Toast.MakeText(this, "user successfully loggedin", ToastLength.Long).Show();
 
@@ -67,29 +73,36 @@ namespace loginRegister
             {
                 Toast.MakeText(this, "name of user is empty", ToastLength.Long).Show();
                 nametext.Error = "name of the user is not inserted";
-                return false;   
-            }
-            else
-                return true;    
-        }
-
-        private bool nameok()
-        {
-            bool isEmail = Regex.IsMatch(emailtext.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-            if (emailtext.Text == "" && isEmail)
-            {
-                Toast.MakeText(this, "email of user is empty", ToastLength.Long).Show();
-                emailtext.Error = "email of the user is not inserted";
                 return false;
             }
             else
                 return true;
         }
 
+        private bool nameok()
+        {
+            bool isEmail = Regex.IsMatch(emailtext.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+            if (emailtext.Text.Trim().Equals(""))
+            {
+                Toast.MakeText(this, "email of user is empty", ToastLength.Long).Show();
+                emailtext.Error = "email of the user is not inserted";
+                return false;
+            }
+            if (!isEmail)
+            {
+                Toast.MakeText(this, "Invalid Email", ToastLength.Long).Show();
+                emailtext.Error = "Invalid email address";
+                return false;
+            }
+
+
+            return true;
+        }
+
         private bool emailok()
         {
-            
-            if (usernametext.Text == ""  )
+
+            if (usernametext.Text == "")
             {
                 Toast.MakeText(this, "username is empty", ToastLength.Long).Show();
                 usernametext.Error = "username of the user is not inserted";
@@ -133,8 +146,8 @@ namespace loginRegister
             fb = FindViewById<CardView>(Resource.Id.view2);
             google = FindViewById<CardView>(Resource.Id.view3);
             tologin = FindViewById<TextView>(Resource.Id.registerbelow2);
-            passwordtext = FindViewById<TextInputEditText>(Resource.Id.passwordedittext);
             regitertext = FindViewById<TextView>(Resource.Id.registertext);
+            passwordtext = FindViewById<TextInputEditText>(Resource.Id.passwordedittext);
             emailtext = FindViewById<TextInputEditText>(Resource.Id.emailedittext);
             nametext = FindViewById<TextInputEditText>(Resource.Id.namedittext);
             usernametext = FindViewById<TextInputEditText>(Resource.Id.usernamedittext);

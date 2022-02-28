@@ -14,7 +14,7 @@ using System.Text;
 
 namespace loginRegister
 {
-    [Activity(Label = "login",Theme = "@style/AppTheme.NoActionbar")]
+    [Activity(Label = "login",Theme = "@style/AppTheme.NoActionbar", NoHistory = true)]
     public class login : Activity
     {
         CardView fb, google;

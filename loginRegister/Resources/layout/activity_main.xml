@@ -5,14 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:fillViewport="true"
-   
     android:layout_width="match_parent"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:paddingTop="70dp"
         android:paddingLeft="40dp"
-             android:background="@drawable/bgimg"
+        android:background="@drawable/bgimg"
         android:paddingRight="40dp"
         android:layout_height="match_parent">
         <TextView
@@ -64,6 +63,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:hint="Enter name of user"
                 android:imeOptions="actionNext"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:inputType="text"
                 android:drawablePadding="20dp"
                 android:id="@+id/namedittext"
