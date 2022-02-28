@@ -18,7 +18,7 @@ namespace loginRegister
     public class login : Activity
     {
         CardView fb, google;
-        TextView toregisterpage , registertex;
+        TextView toregisterpage , registertex,forgotpass;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -27,6 +27,8 @@ namespace loginRegister
             fb  = FindViewById<CardView>(Resource.Id.view2);
             toregisterpage = FindViewById<TextView>(Resource.Id.registerbelow2);
             registertex = FindViewById<TextView>(Resource.Id.registertext);
+            forgotpass = FindViewById<TextView>(Resource.Id.forgotpass);
+            forgotpass.Click += Forgotpass_Click;
             TextPaint paint = registertex.Paint;
             float width = paint.MeasureText(registertex.Text);
 
@@ -44,6 +46,11 @@ namespace loginRegister
             google.Click += Google_Click;
             toregisterpage.Click += Toregisterpage_Click;
             // Create your application here
+        }
+
+        private void Forgotpass_Click(object sender, EventArgs e)
+        {
+            Toast.MakeText(this,"forgot password clicked",ToastLength.Short).Show();    
         }
 
         private void Fb_Click(object sender, EventArgs e)

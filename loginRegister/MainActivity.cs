@@ -9,6 +9,8 @@ using Android.Text;
 using Android.Graphics;
 using Google.Android.Material.TextField;
 using System;
+using System.Text.RegularExpressions;
+
 
 namespace loginRegister
 {
@@ -73,7 +75,8 @@ namespace loginRegister
 
         private bool nameok()
         {
-            if (emailtext.Text == "")
+            bool isEmail = Regex.IsMatch(emailtext.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+            if (emailtext.Text == "" && isEmail)
             {
                 Toast.MakeText(this, "email of user is empty", ToastLength.Long).Show();
                 emailtext.Error = "email of the user is not inserted";
@@ -85,7 +88,8 @@ namespace loginRegister
 
         private bool emailok()
         {
-            if (usernametext.Text == "")
+            
+            if (usernametext.Text == ""  )
             {
                 Toast.MakeText(this, "username is empty", ToastLength.Long).Show();
                 usernametext.Error = "username of the user is not inserted";
@@ -97,10 +101,11 @@ namespace loginRegister
 
         private bool passwordok()
         {
-            if (passwordtext.Text == "")
+            var length1 = passwordtext.Length();
+            if (passwordtext.Text.Length <8)
             {
-                Toast.MakeText(this, "password of user is empty", ToastLength.Long).Show();
-                passwordtext.Error = "password of the user is not inserted";
+                Toast.MakeText(this, "password of user is empty or less than 8", ToastLength.Long).Show();
+                passwordtext.Error = "password of the user is should not be less than 8";
                 return false;
             }
             else
