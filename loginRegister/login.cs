@@ -7,6 +7,7 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using AndroidX.CardView.Widget;
+using Google.Android.Material.TextField;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,9 @@ namespace loginRegister
     public class login : Activity
     {
         CardView fb, google;
+        Button loginbtn;
         TextView toregisterpage , registertex,forgotpass;
+        TextInputEditText passworwtext1,usernamete;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -26,6 +29,9 @@ namespace loginRegister
             google = FindViewById<CardView>(Resource.Id.view3);
             fb  = FindViewById<CardView>(Resource.Id.view2);
             toregisterpage = FindViewById<TextView>(Resource.Id.registerbelow2);
+            passworwtext1 =  FindViewById<TextInputEditText>(Resource.Id.passwordtext1);
+            loginbtn = FindViewById<Button>(Resource.Id.registerbutton);
+            usernamete = FindViewById<TextInputEditText>(Resource.Id.usernametex);
             registertex = FindViewById<TextView>(Resource.Id.registertext);
             forgotpass = FindViewById<TextView>(Resource.Id.forgotpass);
             forgotpass.Click += Forgotpass_Click;
@@ -46,10 +52,26 @@ namespace loginRegister
             google.Click += Google_Click;
             toregisterpage.Click += Toregisterpage_Click;
             // Create your application here
+            loginbtn.Click += Loginbtn_Click;
+        }
+
+        private void Loginbtn_Click(object sender, EventArgs e)
+        {
+            if (!passwordok() && !usernameok())
+            {
+                Toast.MakeText(this, "Task Failed Successfully", ToastLength.Long).Show();
+                return;
+            }
+            if (passwordok() && usernameok())
+            {
+                Toast.MakeText(this, "user successfully loggedin", ToastLength.Long).Show();
+
+            }
         }
 
         private void Forgotpass_Click(object sender, EventArgs e)
         {
+
             Toast.MakeText(this,"forgot password clicked",ToastLength.Short).Show();    
         }
 
@@ -62,7 +84,29 @@ namespace loginRegister
         {
             Toast.MakeText(this,"google button clicked",ToastLength.Short).Show();
         }
-
+        private bool usernameok()
+        {
+            if (usernamete.Text == "")
+            {
+                Toast.MakeText(this, "name of user is empty", ToastLength.Long).Show();
+                usernamete.Error = "name of the user is not inserted";
+                return false;
+            }
+            else
+                return true;
+        }
+        private bool passwordok()
+        {
+            var length1 = passworwtext1.Length();
+            if (passworwtext1.Text.Length < 8)
+            {
+                Toast.MakeText(this, "password of user is empty or less than 8", ToastLength.Long).Show();
+                passworwtext1.Error = "password of the user is should not be less than 8";
+                return false;
+            }
+            else
+                return true;
+        }
         private void Toregisterpage_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this,typeof(MainActivity));

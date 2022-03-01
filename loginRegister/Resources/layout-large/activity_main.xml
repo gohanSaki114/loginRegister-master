@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    
     android:layout_width="match_parent"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,13 +21,13 @@
             android:backgroundTint="@drawable/backgroundtextview"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/registerbelow"
-            android:textSize="52dp"
+            android:textSize="40dp"
             android:layout_marginBottom="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="15dp"
             app:layout_constraintTop_toBottomOf="@+id/registertext"
             android:id="@+id/registerbelow"
             app:layout_constraintBottom_toTopOf="@+id/space111"
@@ -36,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textColor="#FF0000"
             android:layout_marginLeft="4dp"
             android:id="@+id/registerbelow2"
@@ -50,7 +49,7 @@
             android:id="@+id/space111"
             android:layout_width="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_height="50dp"/>
+            android:layout_height="35dp"/>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:id="@+id/namecontainer"
@@ -63,7 +62,8 @@
             android:layout_height="62dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:hint="Enter name of user"
-                android:singleLine="true"
+                android:imeOptions="actionNext"
+                  android:singleLine="true"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:inputType="text"
                 android:drawablePadding="20dp"
@@ -81,7 +81,7 @@
             app:boxCornerRadiusBottomStart="6dp"
             app:boxCornerRadiusTopEnd="6dp"
             app:boxCornerRadiusTopStart="6dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintTop_toBottomOf="@id/namecontainer"
             android:layout_height="62dp">
@@ -98,7 +98,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:id="@+id/usernamecontainer"
             app:boxCornerRadiusBottomEnd="6dp"
@@ -125,7 +125,7 @@
             android:layout_width="match_parent"
             android:id="@+id/passwordcontainer"
             app:passwordToggleEnabled="true"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
             android:hint="Enter password"
             app:boxCornerRadiusBottomEnd="6dp"
             app:boxCornerRadiusBottomStart="6dp"
@@ -156,21 +156,20 @@
             app:layout_constraintTop_toBottomOf="@+id/space222"
             android:text="Register"
             android:textAllCaps="false"
+            android:layout_marginLeft="55dp"
             android:elevation="80dp"
             android:outlineProvider="background"
-            android:layout_marginHorizontal="80dp"
+            android:layout_marginRight="60dp"
             app:cornerRadius="50dp"
-            android:layout_marginTop="40dp"
             android:backgroundTint="#1c57ef"
             android:id="@+id/registerbutton"
             android:layout_width="match_parent"
-            android:layout_height="70dp"/>
+            android:layout_height="52dp"/>
 
         <TextView
             android:layout_marginTop="33dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:textStyle="bold"
-            android:textSize="20dp"
             android:id="@+id/registertext1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerbutton"
@@ -179,17 +178,16 @@
             android:layout_height="wrap_content"/>
         <androidx.cardview.widget.CardView
             android:layout_marginTop="40dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="70dp"
             app:layout_constraintTop_toBottomOf="@+id/registertext1"
             android:layout_width="50dp"
             app:layout_constraintEnd_toStartOf="@+id/view3"
             android:layout_height="50dp"
-            app:layout_constraintStart_toStartOf="parent"
+   
             android:elevation="12dp"
             android:id="@+id/view2"
             app:cardCornerRadius="40dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="40dp"
             android:innerRadius="0dp"
             android:shape="ring"
             android:thicknessRatio="1.9">
@@ -205,13 +203,11 @@
         <androidx.cardview.widget.CardView
             android:layout_marginTop="40dp"
             app:layout_constraintTop_toBottomOf="@+id/registertext1"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="150dp"
+            android:layout_marginRight="70dp"
             android:elevation="12dp"
             android:id="@+id/view3"
-            android:layout_marginBottom="40dp"
             app:layout_constraintStart_toEndOf="@+id/view2"
             app:cardCornerRadius="40dp"
             android:innerRadius="0dp"
