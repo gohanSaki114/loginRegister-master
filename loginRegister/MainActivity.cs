@@ -14,14 +14,14 @@ using System.Text.RegularExpressions;
 
 namespace loginRegister
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionbar", NoHistory = true, MainLauncher = false)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionbar", NoHistory = true, MainLauncher = false, WindowSoftInputMode = Android.Views.SoftInput.AdjustPan)]
     public class MainActivity : AppCompatActivity
     {
-        TextInputLayout namecontainer, emailcontainer, usernamecontainer, passwordconatiner;
-        TextInputEditText nametext, emailtext, usernametext, passwordtext;
+        TextInputLayout nameContainer, emailContainer, userNameContainer, passwordConatiner;
+        TextInputEditText nameEditText, emailEditText, usernameEditText, passworwEditText;
         CardView fb, google;
-        Button registerbutton;
-        TextView tologin, regitertext;
+        Button registerButton;
+        TextView loginTextview, regiterTextview;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,11 +29,25 @@ namespace loginRegister
             // Set our view from the "main" layout resource
 
             SetContentView(Resource.Layout.activity_main);
-            Uireferences();
-            registerbutton.Click += Registerbutton_Click;
+            uireferences();
+            uiclick();
+            setgradient();
 
-            TextPaint paint = regitertext.Paint;
-            float width = paint.MeasureText(regitertext.Text);
+        }
+
+        private void uiclick()
+        {
+            registerButton.Click += Registerbutton_Click1;
+
+            loginTextview.Click += Tologin_Click;
+            fb.Click += Fb_Click;
+            google.Click += Google_Click;
+        }
+
+        private void setgradient()
+        {
+            TextPaint paint = regiterTextview.Paint;
+            float width = paint.MeasureText(regiterTextview.Text);
 
             int[] vs = new int[]{
                         Color.ParseColor("#8446CC"),
@@ -42,17 +56,29 @@ namespace loginRegister
                         Color.ParseColor("#478AEA"),
                         Color.ParseColor("#F97C3C"),
                     };
-            Shader textShader = new LinearGradient(0, 0, width, regitertext.TextSize,
+            Shader textShader = new LinearGradient(0, 0, width, regiterTextview.TextSize,
                     vs, null, Shader.TileMode.Clamp);
-            regitertext.Paint.SetShader(textShader);
-            tologin.Click += Tologin_Click;
-            fb.Click += Fb_Click;
-            google.Click += Google_Click;
+            regiterTextview.Paint.SetShader(textShader);
         }
 
+        private void uireferences()
+        {
+            fb = FindViewById<CardView>(Resource.Id.view2);
+            google = FindViewById<CardView>(Resource.Id.view3);
+            loginTextview = FindViewById<TextView>(Resource.Id.registerbelow2);
+            regiterTextview = FindViewById<TextView>(Resource.Id.registertext);
+            passworwEditText = FindViewById<TextInputEditText>(Resource.Id.passwordedittext);
+            emailEditText = FindViewById<TextInputEditText>(Resource.Id.emailedittext);
+            nameEditText = FindViewById<TextInputEditText>(Resource.Id.namedittext);
+            usernameEditText = FindViewById<TextInputEditText>(Resource.Id.usernamedittext);
+            nameContainer = FindViewById<TextInputLayout>(Resource.Id.namecontainer);
+            emailContainer = FindViewById<TextInputLayout>(Resource.Id.emailcontainer);
+            userNameContainer = FindViewById<TextInputLayout>(Resource.Id.usernamecontainer);
+            passwordConatiner = FindViewById<TextInputLayout>(Resource.Id.passwordcontainer);
+            registerButton = FindViewById<Button>(Resource.Id.registerbutton);
+        }
 
-
-        private void Registerbutton_Click(object sender, System.EventArgs e)
+        private void Registerbutton_Click1(object sender, EventArgs e)
         {
             if (!isValidName() && !isValidEmail() && !isValidUserName() && !isValidPassword())
             {
@@ -67,12 +93,13 @@ namespace loginRegister
             }
         }
 
+
         private bool isValidName()
         {
-            if (nametext.Text == "")
+            if (nameEditText.Text == "")
             {
                 Toast.MakeText(this, "name of user is empty", ToastLength.Long).Show();
-                namecontainer.Error = "name of the user is not inserted";
+                nameContainer.Error = "name of the user is not inserted";
                 return false;
             }
             else
@@ -81,17 +108,17 @@ namespace loginRegister
 
         private bool isValidEmail()
         {
-            bool isEmail = Regex.IsMatch(emailtext.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-            if (emailtext.Text.Trim().Equals(""))
+            bool isEmail = Regex.IsMatch(emailEditText.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+            if (emailEditText.Text.Trim().Equals(""))
             {
                 Toast.MakeText(this, "email of user is empty", ToastLength.Long).Show();
-                emailcontainer.Error = "email of the user is not inserted";
+                emailContainer.Error = "email of the user is not inserted";
                 return false;
             }
             if (!isEmail)
             {
                 Toast.MakeText(this, "Invalid Email", ToastLength.Long).Show();
-                emailcontainer.Error = "Invalid email address";
+                emailContainer.Error = "Invalid email address";
                 return false;
             }
             return true;
@@ -100,10 +127,10 @@ namespace loginRegister
         private bool isValidUserName()
         {
 
-            if (usernametext.Text == "")
+            if (usernameEditText.Text == "")
             {
                 Toast.MakeText(this, "username is empty", ToastLength.Long).Show();
-                usernamecontainer.Error = "username of the user is not inserted";
+                userNameContainer.Error = "username of the user is not inserted";
                 return false;
             }
             else
@@ -112,11 +139,11 @@ namespace loginRegister
 
         private bool isValidPassword()
         {
-            var length1 = passwordtext.Length();
-            if (passwordtext.Text.Length <8)
+            var length1 = passworwEditText.Length();
+            if (passworwEditText.Text.Length < 8)
             {
                 Toast.MakeText(this, "password of user is empty or less than 8", ToastLength.Long).Show();
-                passwordconatiner.Error = "password of the user is should not be less than 8";
+                passwordConatiner.Error = "password of the user is should not be less than 8";
                 return false;
             }
             else
@@ -127,6 +154,7 @@ namespace loginRegister
         {
             Intent intent = new Intent(this, typeof(login));
             StartActivity(intent);
+            FinishAffinity();
         }
 
         private void Google_Click(object sender, System.EventArgs e)
@@ -139,22 +167,7 @@ namespace loginRegister
             Toast.MakeText(this, "Fb button clicked", ToastLength.Short).Show();
         }
 
-        private void Uireferences()
-        {
-            fb = FindViewById<CardView>(Resource.Id.view2);
-            google = FindViewById<CardView>(Resource.Id.view3);
-            tologin = FindViewById<TextView>(Resource.Id.registerbelow2);
-            regitertext = FindViewById<TextView>(Resource.Id.registertext);
-            passwordtext = FindViewById<TextInputEditText>(Resource.Id.passwordedittext);
-            emailtext = FindViewById<TextInputEditText>(Resource.Id.emailedittext);
-            nametext = FindViewById<TextInputEditText>(Resource.Id.namedittext);
-            usernametext = FindViewById<TextInputEditText>(Resource.Id.usernamedittext);
-            namecontainer = FindViewById<TextInputLayout>(Resource.Id.namecontainer);
-            emailcontainer = FindViewById<TextInputLayout>(Resource.Id.emailcontainer);
-            usernamecontainer = FindViewById<TextInputLayout>(Resource.Id.usernamecontainer);
-            passwordconatiner = FindViewById<TextInputLayout>(Resource.Id.passwordcontainer);
-            registerbutton = FindViewById<Button>(Resource.Id.registerbutton);
-        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

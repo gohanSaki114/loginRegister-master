@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Text;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using AndroidX.CardView.Widget;
 using Google.Android.Material.TextField;
 using System;
@@ -15,28 +16,39 @@ using System.Text;
 
 namespace loginRegister
 {
-    [Activity(Label = "login",Theme = "@style/AppTheme.NoActionbar", NoHistory = true)]
-    public class login : Activity
+    [Activity(Label = "login", Theme = "@style/AppTheme.NoActionbar", NoHistory = true, WindowSoftInputMode = SoftInput.AdjustPan)]
+    public class login : AppCompatActivity
     {
         CardView fb, google;
-        Button loginbtn;
-        TextView toregisterpage , registertex,forgotpass;
-        TextInputEditText passworwtext1,usernamete;
+        Button loginbutton;
+        TextView ToRegisterpageTextivew, RegisterTextView, ForgotPassTextView;
+        TextInputEditText passworwEditText, usernameEditText;
+        TextInputLayout passwordContainer, usernameContainer;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.loginactivity);
-            google = FindViewById<CardView>(Resource.Id.view3);
-            fb  = FindViewById<CardView>(Resource.Id.view2);
-            toregisterpage = FindViewById<TextView>(Resource.Id.registerbelow2);
-            passworwtext1 =  FindViewById<TextInputEditText>(Resource.Id.passwordtext1);
-            loginbtn = FindViewById<Button>(Resource.Id.registerbutton);
-            usernamete = FindViewById<TextInputEditText>(Resource.Id.usernametex);
-            registertex = FindViewById<TextView>(Resource.Id.registertext);
-            forgotpass = FindViewById<TextView>(Resource.Id.forgotpass);
-            forgotpass.Click += Forgotpass_Click;
-            TextPaint paint = registertex.Paint;
-            float width = paint.MeasureText(registertex.Text);
+            uireferences();
+            uiclick();
+            setgradient();
+
+
+        }
+
+        private void uiclick()
+        {
+            ForgotPassTextView.Click += Forgotpass_Click;
+            fb.Click += Fb_Click;
+            google.Click += Google_Click;
+            ToRegisterpageTextivew.Click += Toregisterpage_Click;
+            // Create your application here
+            loginbutton.Click += Loginbtn_Click;
+        }
+
+        private void setgradient()
+        {
+            TextPaint paint = RegisterTextView.Paint;
+            float width = paint.MeasureText(RegisterTextView.Text);
 
             int[] vs = new int[]{
                         Color.ParseColor("#8446CC"),
@@ -45,14 +57,23 @@ namespace loginRegister
                         Color.ParseColor("#478AEA"),
                         Color.ParseColor("#F97C3C"),
                     };
-            Shader textShader = new LinearGradient(0, 0, width, registertex.TextSize,
+            Shader textShader = new LinearGradient(0, 0, width, RegisterTextView.TextSize,
                     vs, null, Shader.TileMode.Clamp);
-            registertex.Paint.SetShader(textShader);
-            fb.Click += Fb_Click;
-            google.Click += Google_Click;
-            toregisterpage.Click += Toregisterpage_Click;
-            // Create your application here
-            loginbtn.Click += Loginbtn_Click;
+            ForgotPassTextView.Paint.SetShader(textShader);
+        }
+
+        private void uireferences()
+        {
+            google = FindViewById<CardView>(Resource.Id.view3);
+            passwordContainer = FindViewById<TextInputLayout>(Resource.Id.passwordcontainer);
+            usernameContainer = FindViewById<TextInputLayout>(Resource.Id.usernamecontainer);
+            fb = FindViewById<CardView>(Resource.Id.view2);
+            ToRegisterpageTextivew = FindViewById<TextView>(Resource.Id.registerbelow2);
+            passworwEditText = FindViewById<TextInputEditText>(Resource.Id.passwordtext1);
+            loginbutton = FindViewById<Button>(Resource.Id.registerbutton);
+            usernameEditText = FindViewById<TextInputEditText>(Resource.Id.usernametex);
+            RegisterTextView = FindViewById<TextView>(Resource.Id.registertext);
+            ForgotPassTextView = FindViewById<TextView>(Resource.Id.forgotpass);
         }
 
         private void Loginbtn_Click(object sender, EventArgs e)
@@ -72,7 +93,7 @@ namespace loginRegister
         private void Forgotpass_Click(object sender, EventArgs e)
         {
 
-            Toast.MakeText(this,"forgot password clicked",ToastLength.Short).Show();    
+            Toast.MakeText(this, "forgot password clicked", ToastLength.Short).Show();
         }
 
         private void Fb_Click(object sender, EventArgs e)
@@ -82,14 +103,14 @@ namespace loginRegister
 
         private void Google_Click(object sender, EventArgs e)
         {
-            Toast.MakeText(this,"google button clicked",ToastLength.Short).Show();
+            Toast.MakeText(this, "google button clicked", ToastLength.Short).Show();
         }
         private bool usernameok()
         {
-            if (usernamete.Text == "")
+            if (usernameEditText.Text == "")
             {
                 Toast.MakeText(this, "name of user is empty", ToastLength.Long).Show();
-                usernamete.Error = "name of the user is not inserted";
+                usernameContainer.Error = "name of the user is not inserted";
                 return false;
             }
             else
@@ -97,11 +118,11 @@ namespace loginRegister
         }
         private bool passwordok()
         {
-            var length1 = passworwtext1.Length();
-            if (passworwtext1.Text.Length < 8)
+            var length1 = passworwEditText.Length();
+            if (passworwEditText.Text.Length < 8)
             {
                 Toast.MakeText(this, "password of user is empty or less than 8", ToastLength.Long).Show();
-                passworwtext1.Error = "password of the user is should not be less than 8";
+                passwordContainer.Error = "password of the user is should not be less than 8";
                 return false;
             }
             else
@@ -109,8 +130,9 @@ namespace loginRegister
         }
         private void Toregisterpage_Click(object sender, EventArgs e)
         {
-            Intent intent = new Intent(this,typeof(MainActivity));
-            StartActivity(intent);  
+            Intent intent = new Intent(this, typeof(MainActivity));
+            StartActivity(intent);
+            FinishAffinity();
         }
     }
 }

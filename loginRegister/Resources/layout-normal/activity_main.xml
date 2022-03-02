@@ -8,11 +8,11 @@
     android:layout_width="match_parent"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:paddingTop="70dp"
-        android:paddingLeft="40dp"
+       android:layout_width="match_parent"
+        android:paddingTop="@dimen/constraintpaddingTop"
+        android:paddingLeft="@dimen/constraintpaddingleft"
         android:background="@drawable/bgimg"
-        android:paddingRight="40dp"
+        android:paddingRight="@dimen/constraintpaddingright"
         android:layout_height="match_parent">
         <TextView
             app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
             app:boxCornerRadiusBottomStart="6dp"
             app:boxCornerRadiusTopEnd="6dp"
             app:boxCornerRadiusTopStart="6dp"
-            android:layout_marginTop="10dp"
+             android:layout_marginTop="@dimen/layout_marginTop"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintTop_toBottomOf="@id/namecontainer"
             android:layout_height="62dp">
@@ -97,7 +97,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="10dp"
+             android:layout_marginTop="@dimen/layout_marginTop"
             android:layout_width="match_parent"
             android:id="@+id/usernamecontainer"
             app:boxCornerRadiusBottomEnd="6dp"
@@ -124,7 +124,7 @@
             android:layout_width="match_parent"
             android:id="@+id/passwordcontainer"
             app:passwordToggleEnabled="true"
-            android:layout_marginTop="10dp"
+             android:layout_marginTop="@dimen/layout_marginTop"
             android:hint="Enter password"
             app:boxCornerRadiusBottomEnd="6dp"
             app:boxCornerRadiusBottomStart="6dp"
@@ -153,7 +153,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/space222"
-            android:text="Register"
+            android:text="@string/RegisterTextView"
             android:textAllCaps="false"
             android:layout_marginLeft="55dp"
             android:elevation="80dp"
@@ -224,4 +224,4 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</ScrollView>    

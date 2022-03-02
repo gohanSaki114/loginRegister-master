@@ -20,13 +20,13 @@
             android:backgroundTint="@drawable/backgroundtextview"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/registerbelow"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:layout_marginTop="12dp"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="12dp"
             app:layout_constraintTop_toBottomOf="@+id/registertext"
             android:id="@+id/registerbelow"
             app:layout_constraintBottom_toTopOf="@+id/space111"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:textSize="15dp"
+            android:textSize="12dp"
             android:textColor="#FF0000"
             android:layout_marginLeft="4dp"
             android:id="@+id/registerbelow2"
@@ -102,7 +102,7 @@
         <TextView
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:textSize="15dp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordcontainer"
             android:text="Forgot Password ?"
@@ -136,7 +136,7 @@
             android:layout_marginTop="33dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:id="@+id/registertext1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerbutton"

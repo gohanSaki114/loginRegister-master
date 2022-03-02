@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<dimen name="constraintpaddingTop">95dp</dimen>
+	<dimen name="constraintpaddingleft">40dp</dimen>
+	<dimen name="constraintpaddingright">40dp</dimen>
+	<dimen name="layout_marginTop">15dp</dimen>
+	<dimen name="textViewAndroidMarginTop">5dp</dimen>
+	<dimen name="editTextAndroidPadding">10dp</dimen>
+	<dimen name="editTextAndroidDrawablePadding">12dp</dimen>
+	<dimen name="editTextAndroidTextSize3">15sp</dimen>
+	<dimen name="editTextAndroidLayoutHeight">57dp</dimen>
+	<dimen name="editTextAndroidLayoutMarginTop">20dp</dimen>
+	<dimen name="buttonLayoutMarginTop">49dp</dimen>
+	<dimen name="buttonTextSize">19sp</dimen>
+	<dimen name="buttonLayoutWidth">200dp</dimen>
+	<dimen name="buttonLayoutHeight">55dp</dimen>
+	<dimen name="textViewLayoutMarginTop">30dp</dimen>
+</resources>
